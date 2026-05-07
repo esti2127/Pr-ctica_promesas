@@ -1,31 +1,70 @@
 // Variables
 
 const formulario = document.querySelector('#formulario');
+const infoUsuarioId = document.querySelector('#id');
+const infoUsuarioNombre = document.querySelector('#nombre');
+const infoUsuarioApellido = document.querySelector('#apellido');
+const infoUsuarioEdad = document.querySelector('#edad');
+const infoUsuarioEmail = document.querySelector('#email');
+
+const arrayUsuarios = [
+  {
+    id: 0,
+    nombre: "Agapito",
+    apellido: "Pérez",
+    edad: 24,
+    email: "agapito@gmail.com",
+  },
+  {
+    id: 1,
+    nombre: "Benito",
+    apellido: "Camela",
+    edad: 28,
+    email: "tardes@gmail.com",
+  },
+  {
+    id: 2,
+    nombre: "Mari",
+    apellido: "Kondo",
+    edad: 48,
+    email: "buenas@gmail.com",
+  },
+]
 
 // Eventos
 
 
 // Funciones
 
-const llamarAPI = () => {
+const llamarAPI = (id) => {
   return new Promise((resolve, reject) => {
-    // TODO: Recoger datos de usuario.
+    let usuarioRecuperado;
+    window.setTimeout(() => {usuarioRecuperado = devolverObjUsuario(id)
+      if (!usuarioRecuperado) {
+        reject('ERROR: Datos de usuario NO recogidos.');
+      } else {
+        resolve(usuarioRecuperado);
+      }
+    }, 2000);
 
-    if (ok) {
-      resolve('Datos de usuario recogidos correctamente.');
-    } else {
-      reject('ERROR: Datos de usuario NO recogidos.');
-    }
+
   })
 };
+
+const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({id}) => id === idABuscar);
 
 
 // Invocaciones.
 
-llamarAPI()
+llamarAPI(0)
   .then(respuesta => {
-
+    console.log(respuesta);
+    infoUsuarioId.value = respuesta.id
+    infoUsuarioNombre.value = respuesta.nombre
+    infoUsuarioApellido.value = respuesta.apellido
+    infoUsuarioEdad.value = respuesta.edad
+    infoUsuarioEmail.value = respuesta.email
   })
   .catch(error => {
-
+    console.log(error);
   });

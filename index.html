@@ -9,18 +9,28 @@
 </head>
 
 <body>
-  <form id="formulario">
-  
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" value="Agapito" required>
-    <label for="apellido">Apellido</label>
-    <input type="text" id="Apellido" name="Apellido" value="Pérez" required>
-    <label for="Edad">Edad</label>
-    <input type="number" id="Edad" name="Edad" value="24" required>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" value="pepe@gmail.com" placeholder="ejemplo@dominio.com" required>
-
-    <button type="submit">Solicitar datos del usuario</button>
+  <form id="formulario" method="POST">
+    <p>
+      <label for="id">ID</label>
+      <input type="number" id="id" name="id" required >
+    </p>
+    <p>
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" disabled>
+    </p>
+    <p>
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" name="Apellido" disabled>
+    </p>
+    <p>
+      <label for="Edad">Edad</label>
+      <input type="number" id="edad" name="Edad" disabled>
+    </p>
+    <p>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" disabled>
+    </p>
+    <button type="submit">Buscar usuario</button>
   </form>
   <script src="js/main.js"></script>
 
