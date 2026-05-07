@@ -1,12 +1,5 @@
 // Variables
 
-const formulario = document.querySelector('#formulario');
-const infoUsuarioId = document.querySelector('#id');
-const infoUsuarioNombre = document.querySelector('#nombre');
-const infoUsuarioApellido = document.querySelector('#apellido');
-const infoUsuarioEdad = document.querySelector('#edad');
-const infoUsuarioEmail = document.querySelector('#email');
-
 const arrayUsuarios = [
   {
     id: 0,
@@ -38,13 +31,17 @@ document.addEventListener('submit', (ev) => {
   ev.preventDefault();
   ev.target.matches('#fomulario');
 
-  llamarAPI(infoUsuarioId.value)
+  llamarAPI(ev.target.id.value)
     .then(respuesta => {
-      infoUsuarioId.value = respuesta.id;
-      infoUsuarioNombre.value = respuesta.nombre;
-      infoUsuarioApellido.value = respuesta.apellido;
-      infoUsuarioEdad.value = respuesta.edad;
-      infoUsuarioEmail.value = respuesta.email;
+      /*
+        También modificamos el valor del id por si lo han modificado en el
+        formulario durante el tiempo de recuperación de datos de la BD.
+      */
+      ev.target.id.value = respuesta.id;
+      ev.target.nombre.value = respuesta.nombre;
+      ev.target.apellido.value = respuesta.apellido;
+      ev.target.edad.value = respuesta.edad;
+      ev.target.email.value = respuesta.email;
     })
     .catch(error => {
       console.log(error);
