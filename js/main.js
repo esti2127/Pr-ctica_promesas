@@ -31,7 +31,25 @@ const arrayUsuarios = [
   },
 ]
 
+
 // Eventos
+
+document.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  ev.target.matches('#fomulario');
+
+  llamarAPI(infoUsuarioId.value)
+    .then(respuesta => {
+      infoUsuarioId.value = respuesta.id;
+      infoUsuarioNombre.value = respuesta.nombre;
+      infoUsuarioApellido.value = respuesta.apellido;
+      infoUsuarioEdad.value = respuesta.edad;
+      infoUsuarioEmail.value = respuesta.email;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+})
 
 
 // Funciones
@@ -39,7 +57,7 @@ const arrayUsuarios = [
 const llamarAPI = (id) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
-      const usuarioRecuperado = devolverObjUsuario(id)
+      const usuarioRecuperado = devolverObjUsuario(id);
       if (!usuarioRecuperado) {
         reject('ERROR: Datos de usuario NO recogidos.');
       } else {
@@ -49,20 +67,7 @@ const llamarAPI = (id) => {
   })
 };
 
-const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({ id }) => id === idABuscar);
+const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({ id }) => id === Number(idABuscar));
 
 
 // Invocaciones.
-
-llamarAPI(0)
-  .then(respuesta => {
-    console.log(respuesta);
-    infoUsuarioId.value = respuesta.id
-    infoUsuarioNombre.value = respuesta.nombre
-    infoUsuarioApellido.value = respuesta.apellido
-    infoUsuarioEdad.value = respuesta.edad
-    infoUsuarioEmail.value = respuesta.email
-  })
-  .catch(error => {
-    console.log(error);
-  });
