@@ -44,7 +44,7 @@ document.addEventListener('submit', (ev) => {
   ev.preventDefault();
   ev.target.matches('#fomulario');
 
-  llamarAPI(ev.target.id.value)
+  llamarPromiseAPI(ev.target.id.value)
     .then(respuesta => {
       /*
         También modificamos el valor del id por si lo han modificado en el
@@ -68,9 +68,9 @@ document.addEventListener('submit', (ev) => {
  * Retorna un promise simulando una llamada a una base de datos retenida durante
  * 2 segundos.
  * @param {number} id
- * @returns {Promise}
+ * @returns {Promise.<Usuario>}
  */
-const llamarAPI = (id) => {
+const llamarPromiseAPI = (id) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
       const usuarioRecuperado = devolverObjUsuario(id);
@@ -84,11 +84,24 @@ const llamarAPI = (id) => {
 };
 
 /**
+ * Misma función que la anterior pero hecha con async en vez de Promise.
+ * @param {number} id
+ * @returns {Promise.<Usuario>}
+ */
+const llamarAsyncAPI = async (id) => {
+  const usuarioRecuperado = devolverObjUsuario(id);
+  await esperar(2000);
+  if (usuarioRecuperado) return usuarioRecuperado
+  else throw 'ERROR: Datos de usuario NO recogidos.';
+};
+
+/**
  * Busca un usuario en la base de datos a partir del id.
  * @param {number} idABuscar - ID por el que buscar al usuario.
  * @returns {Usuario | undefined} - Usuario encontrado o undefined si no encuentra ninguno.
  */
 const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({ id }) => id === Number(idABuscar));
 
+const esperar = (ms) => new Promise(resolve => window.setTimeout(resolve, ms));
 
 // Invocaciones.
