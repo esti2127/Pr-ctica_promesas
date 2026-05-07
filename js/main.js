@@ -38,20 +38,18 @@ const arrayUsuarios = [
 
 const llamarAPI = (id) => {
   return new Promise((resolve, reject) => {
-    let usuarioRecuperado;
-    window.setTimeout(() => {usuarioRecuperado = devolverObjUsuario(id)
+    window.setTimeout(() => {
+      const usuarioRecuperado = devolverObjUsuario(id)
       if (!usuarioRecuperado) {
         reject('ERROR: Datos de usuario NO recogidos.');
       } else {
         resolve(usuarioRecuperado);
       }
     }, 2000);
-
-
   })
 };
 
-const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({id}) => id === idABuscar);
+const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({ id }) => id === idABuscar);
 
 
 // Invocaciones.
