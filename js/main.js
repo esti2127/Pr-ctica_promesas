@@ -1,5 +1,18 @@
 // Variables
+/**
+ * Un objeto Usuario.
+ * @typedef {Object} Usuario
+ * @property {number} id - Identificador único del usuario
+ * @property {string} nombre - Nombre del usuario
+ * @property {string} apellido - Apellido del usuario
+ * @property {number} edad - Edad del usuario
+ * @property {string} email - Correo electrónico del usuario
+ */
 
+/**
+ * Un array de Usuario simulando el contenido de una BBDD.
+ * @type {Usuario[]}
+ */
 const arrayUsuarios = [
   {
     id: 0,
@@ -51,6 +64,12 @@ document.addEventListener('submit', (ev) => {
 
 // Funciones
 
+/**
+ * Retorna un promise simulando una llamada a una base de datos retenida durante
+ * 2 segundos.
+ * @param {number} id
+ * @returns {Promise}
+ */
 const llamarAPI = (id) => {
   return new Promise((resolve, reject) => {
     window.setTimeout(() => {
@@ -64,6 +83,11 @@ const llamarAPI = (id) => {
   })
 };
 
+/**
+ * Busca un usuario en la base de datos a partir del id.
+ * @param {number} idABuscar - ID por el que buscar al usuario.
+ * @returns {Usuario | undefined} - Usuario encontrado o undefined si no encuentra ninguno.
+ */
 const devolverObjUsuario = (idABuscar) => arrayUsuarios.find(({ id }) => id === Number(idABuscar));
 
 
